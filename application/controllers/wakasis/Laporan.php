@@ -10,8 +10,8 @@ class Laporan extends CI_Controller
         $this->load->model('tatausaha/model_siswa');
         $this->load->model('tatausaha/model_nilai');
         $this->load->library('form_validation');
-        $this->load->model('login_model');
-        if($this->login_model->isNotLogin()) redirect(site_url('login'));
+        $this->load->model('model_login');
+        if($this->model_login->isNotLogin()) redirect(site_url('login'));
     }
 
     public function index()
