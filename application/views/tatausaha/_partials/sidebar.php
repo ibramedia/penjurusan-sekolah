@@ -27,15 +27,16 @@
             <i class="fa fa-users"></i> <span>Data Siswa</span>
           </a>
         </li>
-        <li class="<?php echo $this->uri->segment(2) == 'angket' ? 'active': '' ?>">
-          <a href="<?php echo site_url('tatausaha/angket') ?>">
-            <i class="fa fa-newspaper-o"></i> <span>Angket Siswa</span>
-          </a>
-        </li>
         <li class="header">NILAI</li>
         <li class="<?php echo $this->uri->segment(2) == 'nilai' ? 'active': '' ?>">
           <a href="<?php echo site_url('tatausaha/nilai') ?>">
             <i class="fa fa-book"></i> <span>Nilai Siswa</span>
+          </a>
+        </li>
+        <li class="header">ANGKET</li>
+        <li class="<?php echo $this->uri->segment(2) == 'angket' ? 'active': '' ?>">
+          <a href="<?php echo site_url('tatausaha/angket') ?>">
+            <i class="fa fa-newspaper-o"></i> <span>Angket Siswa</span>
           </a>
         </li>
         <li class="header">LAPORAN</li>
