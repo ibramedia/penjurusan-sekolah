@@ -7,7 +7,7 @@ class Profile extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('tatausaha/model_profile');
+        $this->load->model('bk/model_profile');
         // $this->load->library('form_validation');
         $this->load->model('model_login');
         if($this->model_login->isNotLogin()) redirect(site_url('login'));
@@ -16,11 +16,11 @@ class Profile extends CI_Controller
     public function index()
     {
         $user = $this->model_profile;
-        $id = $this->session->userdata('id_tu');
+        $id = $this->session->userdata('id_bk');
         $data["user"] = $user->getById($id);
         if (!$data["user"]) redirect(site_url('login/logout'));
         
-        $this->template->load('tatausaha/base', 'tatausaha/profile/data', $data);
+        $this->template->load('bk/base', 'bk/profile/data', $data);
     }
 
     public function edit($id = null)
@@ -42,7 +42,7 @@ class Profile extends CI_Controller
         $data["user"] = $user->getById($id);
         if (!$data["user"]) show_404();
         
-        redirect(site_url('tatausaha/profile'));
+        redirect(site_url('bk/profile'));
     }
 
 }

@@ -2,12 +2,12 @@
 
 class Model_profile extends CI_Model
 {
-    private $_table = "tu";
+    private $_table = "bk";
 
-    public $id_tu;
+    public $id_bk;
     public $username;
     public $password;
-    public $nama_tu;
+    public $nama_bk;
 
     public function rules()
     {
@@ -15,28 +15,28 @@ class Model_profile extends CI_Model
             ['field' => 'username',
             'rules' => 'required'],
             
-            ['field' => 'nama_tu',
+            ['field' => 'nama_bk',
             'rules' => 'required']
         ];
     }
 
     public function getById($id)
     {
-        return $this->db->get_where($this->_table, ["id_tu" => $id])->row();
+        return $this->db->get_where($this->_table, ["id_bk" => $id])->row();
     }
 
     public function update()
     {
         $post = $this->input->post();
-        $this->id_tu = $post["id_tu"];
+        $this->id_bk = $post["id_bk"];
         $this->username = $post["username"];
-        $this->nama_tu = $post["nama_tu"];
+        $this->nama_bk = $post["nama_bk"];
         if(!empty($post["password_baru"])){
             $this->password = $post["password_baru"];
         }
         else{
             $this->password = $post["password"];
         }
-        return $this->db->update($this->_table, $this, array('id_tu' => $post['id_tu']));
+        return $this->db->update($this->_table, $this, array('id_bk' => $post['id_bk']));
     }
 }

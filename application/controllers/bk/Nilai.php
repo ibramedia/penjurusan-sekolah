@@ -7,8 +7,8 @@ class Nilai extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('tatausaha/model_siswa');
-        $this->load->model('tatausaha/model_nilai');
+        $this->load->model('bk/model_siswa');
+        $this->load->model('bk/model_nilai');
         $this->load->library('form_validation');
         $this->load->model('model_login');
         if($this->model_login->isNotLogin()) redirect(site_url('login'));
@@ -18,7 +18,7 @@ class Nilai extends CI_Controller
     {
         $data["siswas"] = $this->model_siswa->getAll();
         $data["nilais"] = $this->model_nilai->getAll();
-        $this->template->load('tatausaha/base', 'tatausaha/nilai/data', $data);
+        $this->template->load('bk/base', 'bk/nilai/data', $data);
     }
 
     public function olah()
@@ -35,7 +35,7 @@ class Nilai extends CI_Controller
             $this->session->set_flashdata('failed', 'Gagal disimpan');
         }
 
-        redirect(site_url('tatausaha/nilai'));
+        redirect(site_url('bk/nilai'));
     }
 
     public function delete($id=null)
@@ -48,6 +48,6 @@ class Nilai extends CI_Controller
         else{
             $this->session->set_flashdata('failed', 'Gagal dihapus');
         }
-        redirect(site_url('tatausaha/nilai'));
+        redirect(site_url('bk/nilai'));
     }
 }

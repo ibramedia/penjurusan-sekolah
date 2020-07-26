@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2020 at 05:12 PM
+-- Generation Time: Jul 26, 2020 at 05:29 AM
 -- Server version: 8.0.13
 -- PHP Version: 7.3.11
 
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `penjurusan-sekolah`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bk`
+--
+
+CREATE TABLE `bk` (
+  `id_bk` int(11) NOT NULL,
+  `nama_bk` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- Dumping data for table `bk`
+--
+
+INSERT INTO `bk` (`id_bk`, `nama_bk`, `username`, `password`) VALUES
+(1, 'Siti Yana', 'siti', 'siti123');
 
 -- --------------------------------------------------------
 
@@ -166,26 +186,6 @@ INSERT INTO `siswa` (`id_siswa`, `no_peserta`, `nama_siswa`, `tempat_lahir`, `ta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tu`
---
-
-CREATE TABLE `tu` (
-  `id_tu` int(11) NOT NULL,
-  `nama_tu` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tu`
---
-
-INSERT INTO `tu` (`id_tu`, `nama_tu`, `username`, `password`) VALUES
-(1, 'Siti Yana', 'siti', 'siti123');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `wakasis`
 --
 
@@ -207,6 +207,12 @@ INSERT INTO `wakasis` (`id_wakasis`, `nama_wakasis`, `nip`, `username`, `passwor
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `bk`
+--
+ALTER TABLE `bk`
+  ADD PRIMARY KEY (`id_bk`);
 
 --
 -- Indexes for table `minat_kerja`
@@ -245,12 +251,6 @@ ALTER TABLE `siswa`
   ADD PRIMARY KEY (`id_siswa`);
 
 --
--- Indexes for table `tu`
---
-ALTER TABLE `tu`
-  ADD PRIMARY KEY (`id_tu`);
-
---
 -- Indexes for table `wakasis`
 --
 ALTER TABLE `wakasis`
@@ -259,6 +259,12 @@ ALTER TABLE `wakasis`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bk`
+--
+ALTER TABLE `bk`
+  MODIFY `id_bk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `minat_kerja`
@@ -295,12 +301,6 @@ ALTER TABLE `peminatan`
 --
 ALTER TABLE `siswa`
   MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `tu`
---
-ALTER TABLE `tu`
-  MODIFY `id_tu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `wakasis`

@@ -11,6 +11,6 @@ class Base extends CI_Controller {
 
     public function index()
     {
-        $this->template->load('tatausaha/base', 'tatausaha/home', null);
+        $this->template->load('bk/base', 'bk/home', null);
     }
 }

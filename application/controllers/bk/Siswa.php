@@ -7,8 +7,8 @@ class Siswa extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('tatausaha/model_siswa');
-        $this->load->model('tatausaha/model_nilai');
+        $this->load->model('bk/model_siswa');
+        $this->load->model('bk/model_nilai');
         $this->load->library('form_validation');
         $this->load->model('model_login');
         if($this->model_login->isNotLogin()) redirect(site_url('login'));
@@ -17,7 +17,7 @@ class Siswa extends CI_Controller
     public function index()
     {
         $data["siswas"] = $this->model_siswa->getAll();
-        $this->template->load('tatausaha/base', 'tatausaha/siswa/data', $data);
+        $this->template->load('bk/base', 'bk/siswa/data', $data);
     }
 
     public function add()
@@ -34,12 +34,12 @@ class Siswa extends CI_Controller
             $this->session->set_flashdata('failed', 'Gagal disimpan');
         }
 
-        redirect(site_url('tatausaha/siswa'));
+        redirect(site_url('bk/siswa'));
     }
 
     public function edit($id = null)
     {
-        if (!isset($id)) redirect('tatausaha/siswa');
+        if (!isset($id)) redirect('bk/siswa');
        
         $siswa = $this->model_siswa;
         $validation = $this->form_validation;
@@ -56,7 +56,7 @@ class Siswa extends CI_Controller
         $data["siswa"] = $siswa->getById($id);
         if (!$data["siswa"]) show_404();
         
-        redirect(site_url('tatausaha/siswa'));
+        redirect(site_url('bk/siswa'));
     }
 
     public function delete($id=null)
@@ -69,6 +69,6 @@ class Siswa extends CI_Controller
         else{
             $this->session->set_flashdata('failed', 'Gagal dihapus');
         }
-        redirect(site_url('tatausaha/siswa'));
+        redirect(site_url('bk/siswa'));
     }
 }

@@ -6,7 +6,7 @@ class Angket extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('model_login');
-        $this->load->model('tatausaha/model_siswa');
+        $this->load->model('bk/model_siswa');
         $this->load->model('siswa/model_peminatan');
         $this->load->model('siswa/model_minat_mapel');
         $this->load->model('siswa/model_minat_kerja');
@@ -17,7 +17,7 @@ class Angket extends CI_Controller {
     public function index()
     {
         $data["siswas"] = $this->model_siswa->getAll();
-        $this->template->load('tatausaha/base', 'tatausaha/angket/data', $data);
+        $this->template->load('bk/base', 'bk/angket/data', $data);
     }
 
     public function open($id_siswa)
@@ -28,6 +28,6 @@ class Angket extends CI_Controller {
         $data["minat_mapel"] = $this->model_minat_mapel->getAll($id_siswa);
         $data["minat_kerja"] = $this->model_minat_kerja->getAll($id_siswa);
         $data["minat_pt"] = $this->model_minat_pt->getAll($id_siswa);
-        $this->template->load('tatausaha/base', 'tatausaha/angket/open', $data);
+        $this->template->load('bk/base', 'bk/angket/open', $data);
     }
 }

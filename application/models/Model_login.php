@@ -21,14 +21,14 @@ class Model_login extends CI_Model
             $data["jenis_login"] = $this->jenis_login;
             return $data;
         }
-        elseif($this->jenis_login=='tu'){
+        elseif($this->jenis_login=='bk'){
             $this->username = $post["username"];
             $this->password = $post["password"];
             $where = array(
                 'username' => $this->username,
                 'password' => $this->password
                 );
-            $data["login"] = $this->db->get_where("tu", $where)->row();
+            $data["login"] = $this->db->get_where("bk", $where)->row();
             $data["jenis_login"] = $this->jenis_login;
             return $data;
         }

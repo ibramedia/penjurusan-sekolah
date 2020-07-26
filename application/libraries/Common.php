@@ -17,13 +17,13 @@ class Common
       }
     }
 
-    public function getTatausahaData()
+    public function getBkData()
     {
       $this->CI =& get_instance();
-      $this->CI->load->model('tatausaha/model_profile');
-      $tatausaha = $this->CI->model_profile;
+      $this->CI->load->model('bk/model_profile');
+      $bk = $this->CI->model_profile;
       $id = $this->CI->session->userdata('id_tu');
-      $data = $tatausaha->getById($id);
+      $data = $bk->getById($id);
       if ($data != null) {
         return $data;
       }

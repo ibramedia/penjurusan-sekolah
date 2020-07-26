@@ -56,5 +56,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'login';
 
 $route['siswa'] = 'siswa/base';
-$route['tatausaha'] = 'tatausaha/base';
+$route['bk'] = 'bk/base';
 $route['wakasis'] = 'wakasis/base';

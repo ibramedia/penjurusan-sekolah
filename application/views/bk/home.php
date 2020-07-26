@@ -9,7 +9,7 @@
             <div class="box-body">
               <section class="col-lg-12">
                 
-                <h4 class="box-title">Selamat datang <b><?php echo $this->common->getTatausahaData()->nama_tu;?></b>
+                <h4 class="box-title">Selamat datang <b><?php echo $this->common->getBkData()->nama_bk;?></b>
                 <br><br>
                   <ol>
                     <li>Silakan input data siswa yang belum terdata ke dalam sistem.</li>

@@ -23,7 +23,7 @@
         <select class="form-control" name="jenis_login" required>
           <option value="">Pilih Login</option>
           <option value="sw">Siswa</option>
-          <option value="tu">TU (Tata Usaha)</option>
+          <option value="bk">BK (Bimbingan Konseling)</option>
           <option value="wk">Wakasis (Wakil Kesiswaan)</option>
         </select>
       </div>

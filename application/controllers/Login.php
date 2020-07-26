@@ -14,8 +14,8 @@ class Login extends CI_Controller
         if($this->session->userdata('jenis_login')=='sw'){
             redirect(site_url('siswa'));
         }
-        elseif($this->session->userdata('jenis_login')=='tu'){
-            redirect(site_url('tatausaha'));
+        elseif($this->session->userdata('jenis_login')=='bk'){
+            redirect(site_url('bk'));
         }
         elseif($this->session->userdata('jenis_login')=='wk'){
             redirect(site_url('wakasis'));
@@ -44,16 +44,16 @@ class Login extends CI_Controller
                 redirect(site_url('login'));
             }
         }
-        elseif($data["jenis_login"]=="tu"){
+        elseif($data["jenis_login"]=="bk"){
             if ($data["login"] != null) {
             
                 $data_session = array(
                     'jenis_login' => $data["jenis_login"],
-                    'id_tu' => $data["login"]->id_tu
+                    'id_bk' => $data["login"]->id_bk
                     );
      
                 $this->session->set_userdata($data_session);
-                redirect(site_url('tatausaha'));
+                redirect(site_url('bk'));
             }
             else {
                 $this->session->set_flashdata('failed', 'Username atau password salah');
