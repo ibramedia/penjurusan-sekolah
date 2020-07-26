@@ -51,7 +51,7 @@ class Model_siswa extends CI_Model
 
     public function getAll()
     {
-        $this->db->order_by('id_siswa', 'DESC');
+        $this->db->order_by('nama_siswa', 'ASC');
         return $this->db->get($this->_table)->result();
     }
     

@@ -36,7 +36,7 @@ class Model_nilai extends CI_Model
 
     public function getAll()
     {
-        $this->db->order_by('id_nilai', 'DESC');
+        $this->db->order_by('nama_siswa', 'ASC');
         $this->db->join('siswa', 'siswa.id_siswa = nilai.id_siswa');
         return $this->db->get($this->_table)->result();
     }
