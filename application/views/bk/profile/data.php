@@ -8,11 +8,11 @@
                 <!-- Profile Image -->
                 <div class="box box-default">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('dist/img/tatausaha.png');?>" alt="User profile picture">
+                    <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url('dist/img/bk.png');?>" alt="User profile picture">
 
-                    <h3 class="profile-username text-center"><?php echo $user->nama_tu ?></h3>
+                    <h3 class="profile-username text-center"><?php echo $user->nama_bk ?></h3>
 
-                    <p class="text-muted text-center">Tata Usaha</p>
+                    <p class="text-muted text-center">Bimbingan Konseling</p>
 
                     
                 </div>
@@ -45,13 +45,13 @@
                     <?php endif; ?>
                     
                     <div class="box-body">
-                        <form action="<?php echo site_url('tatausaha/profile/edit/'.($user->id_tu)) ?>" role="form" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                        <input type="hidden" name="id_tu" value="<?php echo $user->id_tu ?>">
+                        <form action="<?php echo site_url('bk/profile/edit/'.($user->id_bk)) ?>" role="form" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                        <input type="hidden" name="id_bk" value="<?php echo $user->id_bk ?>">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Nama Tatausaha</label>
+                                <label class="col-sm-2 control-label">Nama Guru BK</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" placeholder="Nama Tatausaha" name="nama_tu" value="<?php echo $user->nama_tu?>">
+                                    <input type="text" class="form-control" placeholder="Nama Guru BK" name="nama_bk" value="<?php echo $user->nama_bk?>">
                                 </div>
                             </div>
                             <div class="form-group">
