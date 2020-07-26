@@ -22,7 +22,7 @@ class Common
       $this->CI =& get_instance();
       $this->CI->load->model('bk/model_profile');
       $bk = $this->CI->model_profile;
-      $id = $this->CI->session->userdata('id_tu');
+      $id = $this->CI->session->userdata('id_bk');
       $data = $bk->getById($id);
       if ($data != null) {
         return $data;
