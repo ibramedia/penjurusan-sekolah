@@ -59,7 +59,7 @@
                   }?></td>
                   <td>
                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit-data<?php echo $siswa->id_siswa ?>"><i class="fa fa fa-pencil"></i>&nbsp;Edit</a>
-                    <a href="<?php echo site_url('tatausaha/siswa/delete/'.($siswa->id_siswa)) ?>"><button class="btn btn-danger btn-xs" onclick="return confirm('Yakin menghapus data?');"><i class="fa fa fa-trash"></i> Hapus</button></a>
+                    <a href="<?php echo site_url('bk/siswa/delete/'.($siswa->id_siswa)) ?>"><button class="btn btn-danger btn-xs" onclick="return confirm('Yakin menghapus data?');"><i class="fa fa fa-trash"></i> Hapus</button></a>
                   </td>
                     <!-- edit data -->
                     <div class="modal fade" id="edit-data<?php echo $siswa->id_siswa ?>">
@@ -70,7 +70,7 @@
                               <span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Edit Siswa</h4>
                           </div>
-                          <form action="<?php echo site_url('tatausaha/siswa/edit/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data">
+                          <form action="<?php echo site_url('bk/siswa/edit/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data">
                           <input type="hidden" name="id_siswa" value="<?php echo $siswa->id_siswa ?>">
                           <div class="modal-body">
                             <div class="form-group">
@@ -120,7 +120,7 @@
             <span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Tambah Siswa</h4>
         </div>
-        <form action="<?php echo site_url('tatausaha/siswa/add') ?>" role="form" method="POST" enctype="multipart/form-data">
+        <form action="<?php echo site_url('bk/siswa/add') ?>" role="form" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <label>No. Peserta</label>

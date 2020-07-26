@@ -93,7 +93,7 @@
                               <span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Rincian Hasil Siswa</h4>
                           </div>
-                          <form action="<?php echo site_url('tatausaha/nilai/olah/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data">
+                          <form action="<?php echo site_url('bk/nilai/olah/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data">
                           <input type="hidden" name="id_siswa" value="<?php echo $siswa->id_siswa ?>">
                           <input type="hidden" name="id_nilai" value="<?php 
                                                                       foreach ($nilais as $nilai):

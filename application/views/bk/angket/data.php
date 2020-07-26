@@ -45,7 +45,7 @@
                   <td><?php echo $siswa->no_peserta ?></td>
                   <td><?php echo $siswa->nama_siswa ?></td>
                   <td>
-                    <a href="<?php echo site_url('tatausaha/angket/open/'.($siswa->id_siswa)) ?>" class="btn btn-primary btn-xs"><i class="fa fa fa-folder-open"></i>&nbsp;Lihat Angket</a>
+                    <a href="<?php echo site_url('bk/angket/open/'.($siswa->id_siswa)) ?>" class="btn btn-primary btn-xs"><i class="fa fa fa-folder-open"></i>&nbsp;Lihat Angket</a>
                   </td>
                 </tr>
                 <?php endforeach; ?>

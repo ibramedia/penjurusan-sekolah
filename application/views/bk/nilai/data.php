@@ -79,7 +79,7 @@
                     echo "Belum diinput";?></td>
                   <td>
                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit-data<?php echo $siswa->id_siswa ?>"><i class="fa fa fa-pencil"></i>&nbsp;Nilai</a>
-                    <a href="<?php echo site_url('tatausaha/nilai/delete/'.($siswa->id_siswa)) ?>"><button class="btn btn-danger btn-xs" onclick="return confirm('Yakin menghapus data?');"><i class="fa fa fa-trash"></i> Hapus</button></a>
+                    <a href="<?php echo site_url('bk/nilai/delete/'.($siswa->id_siswa)) ?>"><button class="btn btn-danger btn-xs" onclick="return confirm('Yakin menghapus data?');"><i class="fa fa fa-trash"></i> Hapus</button></a>
                   </td>
                     <!-- edit data -->
                     <div class="modal fade" id="edit-data<?php echo $siswa->id_siswa ?>">
@@ -90,7 +90,7 @@
                               <span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Input Nilai Siswa</h4>
                           </div>
-                          <form action="<?php echo site_url('tatausaha/nilai/olah/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data">
+                          <form action="<?php echo site_url('bk/nilai/olah/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data">
                           <input type="hidden" name="id_siswa" value="<?php echo $siswa->id_siswa ?>">
                           <input type="hidden" name="id_nilai" value="<?php 
                                                                       foreach ($nilais as $nilai):
