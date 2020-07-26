@@ -49,8 +49,8 @@ class Model_login extends CI_Model
         if($this->jenis_login=='sw'){
             return $this->session->userdata('id_siswa') === null;
         }
-        elseif($this->jenis_login=='tu'){
-            return $this->session->userdata('id_tu') === null;
+        elseif($this->jenis_login=='bk'){
+            return $this->session->userdata('id_bk') === null;
         }
         elseif($this->jenis_login=='wk'){
             return $this->session->userdata('id_wakasis') === null;
