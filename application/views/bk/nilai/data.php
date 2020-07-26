@@ -110,7 +110,7 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label>Nilai IPA</label>
-                                  <input type="number" class="form-control" placeholder="Nilai IPA" name="ipa" value="<?php 
+                                  <input type="text" class="form-control" placeholder="Nilai IPA" name="ipa" value="<?php 
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
                                                                                                                         echo $nilai->ipa;
@@ -120,7 +120,7 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label>Nilai IPS</label>
-                                  <input type="number" class="form-control" placeholder="Nilai IPS" name="ips" value="<?php 
+                                  <input type="text" class="form-control" placeholder="Nilai IPS" name="ips" value="<?php 
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
                                                                                                                         echo $nilai->ips;
@@ -130,7 +130,7 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label>Nilai PSIKOTES</label>
-                                  <input type="number" class="form-control" placeholder="Nilai PSIKOTES" name="psikotes" value="<?php 
+                                  <input type="text" class="form-control" placeholder="Nilai PSIKOTES" name="psikotes" value="<?php 
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
                                                                                                                         echo $nilai->psikotes;
