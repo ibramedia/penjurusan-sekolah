@@ -618,11 +618,13 @@
                               $no = 1; foreach ($siswas as $siswa):
                               // mencari nilai random / partisi yang di sum = 1
                               // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
-                              $n1 = (float)rand() / (float)getrandmax();
-                              $n2 = (float)rand() / (float)getrandmax();
-                              $sum_n1n2 = $n1 + $n2;
-                              $c1 = number_format($n1/$sum_n1n2, 1);
-                              $c2 = number_format($n2/$sum_n1n2, 1);
+                              // $n1 = (float)rand() / (float)getrandmax();
+                              // $n2 = (float)rand() / (float)getrandmax();
+                              // $sum_n1n2 = $n1 + $n2;
+                              // $c1 = number_format($n1/$sum_n1n2, 1);
+                              // $c2 = number_format($n2/$sum_n1n2, 1);
+                              $c1 = $siswa->partisi_c1;
+                              $c2 = $siswa->partisi_c2;
                               $sum = $c1 + $c2;
                               // derajat ke anggotaan
                               $dkc1 = $c1 * $c1;
