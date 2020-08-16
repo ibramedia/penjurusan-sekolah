@@ -35,7 +35,7 @@
                   <th>No. Peserta</th>
                   <th>Nama Siswa</th>
                   <th>IPA</th>
-                  <th>IPS</th>
+                  <th>MTK</th>
                   <th>PSIKOTES</th>
                   <th>Aksi</th>
                 </tr>
@@ -58,14 +58,14 @@
                   if($jum_ipa==0)
                     echo "Belum diinput";?></td>
                   <td><?php 
-                  $jum_ips=0;
+                  $jum_mtk=0;
                   foreach ($nilais as $nilai):
                   if($siswa->id_siswa==$nilai->id_siswa){
-                    $jum_ips++;
-                    echo $nilai->ips;
+                    $jum_mtk++;
+                    echo $nilai->mtk;
                   }
                   endforeach;
-                  if($jum_ips==0)
+                  if($jum_mtk==0)
                     echo "Belum diinput";?></td>
                   <td><?php 
                   $jum_psikotes=0;
@@ -119,11 +119,11 @@
                               </div>
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label>Nilai IPS</label>
-                                  <input type="text" class="form-control" placeholder="Nilai IPS" name="ips" value="<?php 
+                                  <label>Nilai MTK</label>
+                                  <input type="text" class="form-control" placeholder="Nilai MTK" name="mtk" value="<?php 
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
-                                                                                                                        echo $nilai->ips;
+                                                                                                                        echo $nilai->mtk;
                                                                                                                       endforeach;?>">
                                 </div>
                               </div>

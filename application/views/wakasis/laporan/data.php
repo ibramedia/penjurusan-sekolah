@@ -61,14 +61,14 @@
                   if($jum_ipa==0)
                     echo "Belum diinput";?></td>
                   <td><?php 
-                  $jum_ips=0;
+                  $jum_mtk=0;
                   foreach ($nilais as $nilai):
                   if($siswa->id_siswa==$nilai->id_siswa){
-                    $jum_ips++;
+                    $jum_mtk++;
                     echo $nilai->ips;
                   }
                   endforeach;
-                  if($jum_ips==0)
+                  if($jum_mtk==0)
                     echo "Belum diinput";?></td>
                   <td><?php 
                   $jum_psikotes=0;

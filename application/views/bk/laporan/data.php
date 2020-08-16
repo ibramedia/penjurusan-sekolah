@@ -26,7 +26,8 @@
     				<?php else: ?>
     				<?php endif; ?>
             <div class="box-header">
-              <a href="#" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Cetak</a>
+              <a href="<?php echo site_url('bk/laporan/hitung') ?>" class="btn btn-primary btn-xs"><i class="fa fa-cog"></i> Proses Perhitungan</a>
+              <a href="#" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print"></i> Cetak</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body" style="overflow:auto;">
@@ -37,7 +38,7 @@
                   <th>No. Peserta</th>
                   <th>Nama Siswa</th>
                   <th>IPA</th>
-                  <th>IPS</th>
+                  <th>MTK</th>
                   <th>PSIKOTES</th>
                   <th>Klaster</th>
                   <th>Aksi</th>
@@ -61,14 +62,14 @@
                   if($jum_ipa==0)
                     echo "Belum diinput";?></td>
                   <td><?php 
-                  $jum_ips=0;
+                  $jum_mtk=0;
                   foreach ($nilais as $nilai):
                   if($siswa->id_siswa==$nilai->id_siswa){
-                    $jum_ips++;
-                    echo $nilai->ips;
+                    $jum_mtk++;
+                    echo $nilai->mtk;
                   }
                   endforeach;
-                  if($jum_ips==0)
+                  if($jum_mtk==0)
                     echo "Belum diinput";?></td>
                   <td><?php 
                   $jum_psikotes=0;
@@ -121,17 +122,17 @@
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
                                                                                                                         echo $nilai->ipa;
-                                                                                                                      endforeach;?>">
+                                                                                                                      endforeach;?>" readonly>
                                 </div>
                               </div>
                               <div class="col-md-4">  
                                 <div class="form-group">
-                                  <label>Nilai IPS</label>
-                                  <input type="number" class="form-control" placeholder="Nilai IPS" value="<?php 
+                                  <label>Nilai MTK</label>
+                                  <input type="number" class="form-control" placeholder="Nilai MTK" value="<?php 
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
-                                                                                                                        echo $nilai->ips;
-                                                                                                                      endforeach;?>">
+                                                                                                                        echo $nilai->mtk;
+                                                                                                                      endforeach;?>" readonly>
                                 </div>
                               </div>
                               <div class="col-md-4">  
@@ -141,7 +142,7 @@
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
                                                                                                                         echo $nilai->psikotes;
-                                                                                                                      endforeach;?>">
+                                                                                                                      endforeach;?>" readonly>
                                 </div>
                               </div>
                             </div>
