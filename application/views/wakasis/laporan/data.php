@@ -25,9 +25,9 @@
             </div>
     				<?php else: ?>
     				<?php endif; ?>
-            <div class="box-header">
+            <!-- <div class="box-header">
               <a href="#" class="btn btn-primary pull-right"><i class="fa fa-print"></i> Cetak</a>
-            </div>
+            </div> -->
             <!-- /.box-header -->
             <div class="box-body" style="overflow:auto;">
               <table id="example1" class="table table-bordered table-striped">
@@ -65,7 +65,7 @@
                   foreach ($nilais as $nilai):
                   if($siswa->id_siswa==$nilai->id_siswa){
                     $jum_mtk++;
-                    echo $nilai->ips;
+                    echo $nilai->mtk;
                   }
                   endforeach;
                   if($jum_mtk==0)
@@ -80,7 +80,20 @@
                   endforeach;
                   if($jum_psikotes==0)
                     echo "Belum diinput";?></td>
-                  <td>Putusan disini IPA/IPS nantinya</td>
+                  <td>
+                  <?php
+                  $x =  $siswa->c_value;
+                  if ($x==0 || $x===0.0){
+                    echo "<i>Belum ada putusan</i>";
+                  }
+                  elseif($x <= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                    echo "<b>IPS</b>";
+                  }
+                  elseif ($x >= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                    echo "<b>IPA</b>";
+                  }
+                  ?>
+                  </td>
                   <td>
                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lihat-data<?php echo $siswa->id_siswa ?>"><i class="fa fa fa-folder-open"></i>&nbsp;Rincian</a>
                   </td>
@@ -121,17 +134,17 @@
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
                                                                                                                         echo $nilai->ipa;
-                                                                                                                      endforeach;?>">
+                                                                                                                      endforeach;?>" readonly>
                                 </div>
                               </div>
                               <div class="col-md-4">  
                                 <div class="form-group">
-                                  <label>Nilai IPS</label>
-                                  <input type="number" class="form-control" placeholder="Nilai IPS" value="<?php 
+                                  <label>Nilai MTK</label>
+                                  <input type="number" class="form-control" placeholder="Nilai MTK" value="<?php 
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
-                                                                                                                        echo $nilai->ips;
-                                                                                                                      endforeach;?>">
+                                                                                                                        echo $nilai->mtk;
+                                                                                                                      endforeach;?>" readonly>
                                 </div>
                               </div>
                               <div class="col-md-4">  
@@ -141,13 +154,26 @@
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
                                                                                                                         echo $nilai->psikotes;
-                                                                                                                      endforeach;?>">
+                                                                                                                      endforeach;?>" readonly>
                                 </div>
                               </div>
                             </div>
                             <div class="form-group">
                               <label>Klaster</label>
-                              <h4 class="text-center">IPA/IPS</h4>
+                              <h4 class="text-center">
+                              <?php
+                              $x =  $siswa->c_value;
+                              if ($x==0 || $x===0.0){
+                                echo "<i>Belum ada putusan</i>";
+                              }
+                              elseif($x <= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                                echo "<b>IPS</b>";
+                              }
+                              elseif ($x >= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                                echo "<b>IPA</b>";
+                              }
+                              ?>
+                              </h4>
                             </div>
                           </div>
                           <div class="modal-footer">
