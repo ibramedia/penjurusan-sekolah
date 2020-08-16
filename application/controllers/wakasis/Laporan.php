@@ -7,8 +7,8 @@ class Laporan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('tatausaha/model_siswa');
-        $this->load->model('tatausaha/model_nilai');
+        $this->load->model('bk/model_siswa');
+        $this->load->model('bk/model_nilai');
         $this->load->library('form_validation');
         $this->load->model('model_login');
         if($this->model_login->isNotLogin()) redirect(site_url('login'));
