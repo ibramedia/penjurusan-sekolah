@@ -75,5 +75,5 @@ class Common
         $result = $dayList[$day].", ".$result;
   
        return($result);
-    }
+  }
 }
