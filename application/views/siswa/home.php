@@ -92,7 +92,27 @@
                 </table>
                 </h4>
                 <hr>
-                <h4 class="box-title text-center">Anda lolos masuk ke jurusan<br><b><?php echo "belum diketahui";?></b></h4>
+                <h4 class="box-title text-center">Anda lolos masuk ke jurusan<br>
+                <?php
+                if($data!=$lengkap){
+                  ?>
+                  <i>Mohon lengkapi angket terlebih dahulu</i>
+                  <?php
+                }
+                else{
+                  $x =  $this->common->getSiswaData()->c_value;
+                  if ($x==0 || $x===0.0){
+                    echo "<i>Belum ada putusan</i>";
+                  }
+                  elseif($x <= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                    echo "<b>IPS</b>";
+                  }
+                  elseif ($x >= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                    echo "<b>IPA</b>";
+                  }
+                }
+                ?>
+                </h4>
               </section>
             </div>
           </div>

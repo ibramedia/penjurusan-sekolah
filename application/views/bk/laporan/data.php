@@ -27,7 +27,7 @@
     				<?php endif; ?>
             <div class="box-header">
               <a href="<?php echo site_url('bk/laporan/hitung') ?>" class="btn btn-primary btn-xs"><i class="fa fa-cog"></i> Proses Perhitungan</a>
-              <a href="#" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print"></i> Cetak</a>
+              <!-- <a href="#" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print"></i> Cetak</a> -->
             </div>
             <!-- /.box-header -->
             <div class="box-body" style="overflow:auto;">
@@ -81,7 +81,19 @@
                   endforeach;
                   if($jum_psikotes==0)
                     echo "Belum diinput";?></td>
-                  <td>Putusan disini IPA/IPS nantinya</td>
+                  <td>
+                  <?php
+                  $x =  $siswa->c_value;
+                  if ($x==0 || $x===0.0){
+                    echo "<i>Belum ada putusan</i>";
+                  }
+                  elseif($x <= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                    echo "<b>IPS</b>";
+                  }
+                  elseif ($x >= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                    echo "<b>IPA</b>";
+                  }
+                  ?></td>
                   <td>
                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lihat-data<?php echo $siswa->id_siswa ?>"><i class="fa fa fa-folder-open"></i>&nbsp;Rincian</a>
                   </td>
@@ -148,7 +160,20 @@
                             </div>
                             <div class="form-group">
                               <label>Klaster</label>
-                              <h4 class="text-center">IPA/IPS</h4>
+                              <h4 class="text-center">
+                              <?php
+                                $x =  $siswa->c_value;
+                                if ($x==0 || $x===0.0){
+                                  echo "<i>Belum ada putusan</i>";
+                                }
+                                elseif($x <= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                                  echo "<b>IPS</b>";
+                                }
+                                elseif ($x >= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                                  echo "<b>IPA</b>";
+                                }
+                                ?>
+                              </h4>
                             </div>
                           </div>
                           <div class="modal-footer">
