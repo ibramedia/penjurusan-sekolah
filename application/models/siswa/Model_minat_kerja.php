@@ -21,6 +21,12 @@ class Model_minat_kerja extends CI_Model
         ];
     }
 
+    public function getCount($id_siswa)
+    {
+        $this->db->where('id_siswa', $id_siswa);
+        return $this->db->get($this->_table)->num_rows();
+    }
+
     public function getFrame()
     {
         return $this->db->query("SELECT 1 as 'no', '' as 'item', '' as 'alasan' UNION SELECT 2,'','' UNION SELECT 3,'',''")->result();
