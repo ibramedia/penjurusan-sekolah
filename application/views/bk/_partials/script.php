@@ -52,5 +52,8 @@
       'info'        : true,
       'autoWidth'   : false
     })
+    $('#example3').DataTable()
+    $('#example4').DataTable()
+    $('#example5').DataTable()
   })
 </script>
