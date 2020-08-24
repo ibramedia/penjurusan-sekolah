@@ -18,6 +18,8 @@ class Model_siswa extends CI_Model
     public $bulan_tahun_masuk_smp;
     public $bulan_tahun_lulus_smp;
     public $password;
+    public $partisi_c1;
+    public $partisi_c2;
 
     public function rules()
     {
@@ -77,6 +79,11 @@ class Model_siswa extends CI_Model
         $this->bulan_tahun_masuk_smp = '';
         $this->bulan_tahun_lulus_smp = '';
         $this->password = $post["no_peserta"];
+        $n1 = (float)rand() / (float)getrandmax();
+        $n2 = (float)rand() / (float)getrandmax();
+        $sum_n1n2 = $n1 + $n2;
+        $this->partisi_c1 = number_format($n1/$sum_n1n2, 1);
+        $this->partisi_c2 = number_format($n2/$sum_n1n2, 1);
         return $this->db->insert($this->_table, $this);
     }
 

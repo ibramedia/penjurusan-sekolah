@@ -7,7 +7,7 @@ class Model_nilai extends CI_Model
     public $id_nilai;
     public $id_siswa;
     public $ipa;
-    public $ips;
+    public $mtk;
 
     public function rules()
     {

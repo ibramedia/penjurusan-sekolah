@@ -536,12 +536,12 @@
                                   $x3 = $nilai->psikotes;
                                 }
                               endforeach;
-                              // UiK
+                              // UiJ
                               $j = $dkc1 * $dkc1;
                               $jx1 = $j * $x1;
                               $jx2 = $j * $x2;
                               $jx3 = $j * $x3;
-                              // SUM UiK
+                              // SUM UiJ
                               $j_sum += $j;
                               $jx1_sum += $jx1;
                               $jx2_sum += $jx2;
@@ -559,7 +559,7 @@
                               $pnsum = $pn1 + $pn2 + $pn3;
                               $l1 = sqrt($pnsum);
 
-                              // UiJ
+                              // UiK
                               $k = $dkc2 * $dkc2;
                               $kx1 = $k * $x1;
                               $kx2 = $k * $x2;
