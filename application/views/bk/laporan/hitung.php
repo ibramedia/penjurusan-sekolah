@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                   <td>Nilai Error Terkecil</td>
-                  <td>0.000001</td>
+                  <td>0.1</td>
                 </tr>
               </table>
               <hr>
@@ -46,8 +46,8 @@
                   <th colspan="3" class="text-center">Parameter Hitungan</th>
                 </tr>
                 <tr>
-                  <th>IPA</th>
                   <th>MTK</th>
+                  <th>IPA</th>
                   <th>PSIKOTES</th>
                 </tr>
                 </thead>
@@ -59,16 +59,6 @@
                   <td><?php echo $siswa->no_peserta ?></td>
                   <td><?php echo $siswa->nama_siswa ?></td>
                   <td class="bg-light-blue disabled"><?php 
-                  $jum_ipa=0;
-                  foreach ($nilais as $nilai):
-                  if($siswa->id_siswa==$nilai->id_siswa){
-                    $jum_ipa++;
-                    echo $nilai->ipa;
-                  }
-                  endforeach;
-                  if($jum_ipa==0)
-                    echo "Belum diinput";?></td>
-                  <td class="bg-light-blue disabled"><?php 
                   $jum_mtk=0;
                   foreach ($nilais as $nilai):
                   if($siswa->id_siswa==$nilai->id_siswa){
@@ -77,6 +67,16 @@
                   }
                   endforeach;
                   if($jum_mtk==0)
+                    echo "Belum diinput";?></td>
+                  <td class="bg-light-blue disabled"><?php 
+                  $jum_ipa=0;
+                  foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $jum_ipa++;
+                    echo $nilai->ipa;
+                  }
+                  endforeach;
+                  if($jum_ipa==0)
                     echo "Belum diinput";?></td>
                   <td class="bg-light-blue disabled"><?php 
                   $jum_psikotes=0;
@@ -105,8 +105,8 @@
                         <th colspan="3" class="text-center">Parameter Hitungan</th>
                       </tr>
                       <tr>
-                        <th class="text-center">IPA<br>(X1)</th>
-                        <th class="text-center">MTK<br>(X2)</th>
+                        <th class="text-center">MTK<br>(X1)</th>
+                        <th class="text-center">IPA<br>(X2)</th>
                         <th class="text-center">PSIKOTES<br>(X3)</th>
                       </tr>
                       </thead>
@@ -116,16 +116,6 @@
                       <tr>
                         <td><?php echo $no++ ?></td>
                         <td class="bg-light-blue disabled"><?php 
-                        $jum_ipa=0;
-                        foreach ($nilais as $nilai):
-                        if($siswa->id_siswa==$nilai->id_siswa){
-                          $jum_ipa++;
-                          echo $nilai->ipa;
-                        }
-                        endforeach;
-                        if($jum_ipa==0)
-                          echo "Belum diinput";?></td>
-                        <td class="bg-light-blue disabled"><?php 
                         $jum_mtk=0;
                         foreach ($nilais as $nilai):
                         if($siswa->id_siswa==$nilai->id_siswa){
@@ -134,6 +124,16 @@
                         }
                         endforeach;
                         if($jum_mtk==0)
+                          echo "Belum diinput";?></td>
+                        <td class="bg-light-blue disabled"><?php 
+                        $jum_ipa=0;
+                        foreach ($nilais as $nilai):
+                        if($siswa->id_siswa==$nilai->id_siswa){
+                          $jum_ipa++;
+                          echo $nilai->ipa;
+                        }
+                        endforeach;
+                        if($jum_ipa==0)
                           echo "Belum diinput";?></td>
                         <td class="bg-light-blue disabled"><?php 
                         $jum_psikotes=0;
@@ -305,12 +305,12 @@
                 // parameter
                 foreach ($nilais as $nilai):
                   if($siswa->id_siswa==$nilai->id_siswa){
-                    $x1 = $nilai->ipa;
+                    $x1 = $nilai->mtk;
                   }
                 endforeach;
                 foreach ($nilais as $nilai):
                   if($siswa->id_siswa==$nilai->id_siswa){
-                    $x2 = $nilai->mtk;
+                    $x2 = $nilai->ipa;
                   }
                 endforeach;
                 foreach ($nilais as $nilai):
@@ -523,12 +523,12 @@
                               // parameter
                               foreach ($nilais as $nilai):
                                 if($siswa->id_siswa==$nilai->id_siswa){
-                                  $x1 = $nilai->ipa;
+                                  $x1 = $nilai->mtk;
                                 }
                               endforeach;
                               foreach ($nilais as $nilai):
                                 if($siswa->id_siswa==$nilai->id_siswa){
-                                  $x2 = $nilai->mtk;
+                                  $x2 = $nilai->ipa;
                                 }
                               endforeach;
                               foreach ($nilais as $nilai):
@@ -632,12 +632,12 @@
                               // parameter
                               foreach ($nilais as $nilai):
                                 if($siswa->id_siswa==$nilai->id_siswa){
-                                  $x1 = $nilai->ipa;
+                                  $x1 = $nilai->mtk;
                                 }
                               endforeach;
                               foreach ($nilais as $nilai):
                                 if($siswa->id_siswa==$nilai->id_siswa){
-                                  $x2 = $nilai->mtk;
+                                  $x2 = $nilai->ipa;
                                 }
                               endforeach;
                               foreach ($nilais as $nilai):

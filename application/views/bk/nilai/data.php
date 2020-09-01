@@ -34,8 +34,8 @@
                   <th>No.</th>
                   <th>No. Peserta</th>
                   <th>Nama Siswa</th>
-                  <th>IPA</th>
                   <th>MTK</th>
+                  <th>IPA</th>
                   <th>PSIKOTES</th>
                   <th>Aksi</th>
                 </tr>
@@ -48,16 +48,6 @@
                   <td><?php echo $siswa->no_peserta ?></td>
                   <td><?php echo $siswa->nama_siswa ?></td>
                   <td><?php 
-                  $jum_ipa=0;
-                  foreach ($nilais as $nilai):
-                  if($siswa->id_siswa==$nilai->id_siswa){
-                    $jum_ipa++;
-                    echo $nilai->ipa;
-                  }
-                  endforeach;
-                  if($jum_ipa==0)
-                    echo "Belum diinput";?></td>
-                  <td><?php 
                   $jum_mtk=0;
                   foreach ($nilais as $nilai):
                   if($siswa->id_siswa==$nilai->id_siswa){
@@ -66,6 +56,16 @@
                   }
                   endforeach;
                   if($jum_mtk==0)
+                    echo "Belum diinput";?></td>
+                  <td><?php 
+                  $jum_ipa=0;
+                  foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $jum_ipa++;
+                    echo $nilai->ipa;
+                  }
+                  endforeach;
+                  if($jum_ipa==0)
                     echo "Belum diinput";?></td>
                   <td><?php 
                   $jum_psikotes=0;
@@ -109,21 +109,21 @@
                             <div class="row">
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label>Nilai IPA</label>
-                                  <input type="text" class="form-control" placeholder="Nilai IPA" name="ipa" value="<?php 
+                                  <label>Nilai MTK <sup>*</sup></label>
+                                  <input type="text" class="form-control" placeholder="Nilai MTK" name="mtk" value="<?php 
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
-                                                                                                                        echo $nilai->ipa;
+                                                                                                                        echo $nilai->mtk;
                                                                                                                       endforeach;?>">
                                 </div>
                               </div>
                               <div class="col-md-4">
                                 <div class="form-group">
-                                  <label>Nilai MTK</label>
-                                  <input type="text" class="form-control" placeholder="Nilai MTK" name="mtk" value="<?php 
+                                  <label>Nilai IPA <sup>*</sup></label>
+                                  <input type="text" class="form-control" placeholder="Nilai IPA" name="ipa" value="<?php 
                                                                                                                       foreach ($nilais as $nilai):
                                                                                                                       if($siswa->id_siswa==$nilai->id_siswa)
-                                                                                                                        echo $nilai->mtk;
+                                                                                                                        echo $nilai->ipa;
                                                                                                                       endforeach;?>">
                                 </div>
                               </div>
@@ -138,6 +138,7 @@
                                 </div>
                               </div>
                             </div>
+                            <small><sup>*</sup> Nilai tersebut juga dapat di input oleh siswa</small>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Batal</button>

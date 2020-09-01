@@ -18,7 +18,7 @@
                   </ol>
                 </h4>
 
-                <hr>
+                <!-- <hr>
 
                 <h4 class="box-title"><div class="text-center">Nilai Anda</div>
                 <br>
@@ -90,7 +90,7 @@
                   }
                   ?>
                 </table>
-                </h4>
+                </h4> -->
                 <hr>
                 <h4 class="box-title text-center">Anda lolos masuk ke jurusan<br>
                 <?php

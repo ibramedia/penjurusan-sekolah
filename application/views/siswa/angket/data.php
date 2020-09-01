@@ -28,6 +28,7 @@
                   <li><a href="#tab_3" data-toggle="tab">3. Minat Mapel</a></li>
                   <li><a href="#tab_4" data-toggle="tab">4. Minat Pekerjaan</a></li>
                   <li><a href="#tab_5" data-toggle="tab">5. Minat Studi Lanjut Ke Perguruan Tinggi</a></li>
+                  <li><a href="#tab_6" data-toggle="tab">6. Nilai</a></li>
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane active" id="tab_1">
@@ -333,6 +334,58 @@
                       </table>
                     </div>
                     <!-- /.box-body -->
+                  </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="tab_6">
+                    <b>Nilai Anda</b>
+                    <p>Mohon lengkapi form berikut</p>
+                    <hr>
+                    <!-- /.box-header -->
+                    <form action="<?php echo site_url('siswa/angket/updatebiodata/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                    <input type="hidden" name="id_siswa" value="<?php echo $siswa->id_siswa?>" required>
+                    <input type="hidden" name="no_peserta" value="<?php echo $siswa->no_peserta?>" required>
+                    <input type="hidden" name="password" value="<?php echo $siswa->password?>" required>
+                      <div class="box-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Nilai MTK</label>
+                              <input type="text" class="form-control" placeholder="Nilai MTK" name="n_mtk" value="<?php
+                              foreach ($nilais as $nilai):
+                                if($this->session->userdata('id_siswa')==$nilai->id_siswa){
+                                  echo $nilai->mtk;
+                                }
+                                endforeach;
+                              ?>" required>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Nilai IPA</label>
+                              <input type="text" class="form-control" placeholder="Nilai IPA" name="n_ipa" value="<?php
+                              foreach ($nilais as $nilai):
+                                if($this->session->userdata('id_siswa')==$nilai->id_siswa){
+                                  echo $nilai->ipa;
+                                }
+                                endforeach;
+                              ?>" required>
+                            </div>
+                          </div>
+                          <!-- <div class="col-md-4">
+                            <div class="form-group">
+                              <label>Nilai PSIKOTES</label>
+                              <input type="text" class="form-control" placeholder="Nilai PSIKOTES" name="n_psi" value="<?php echo $siswa->tanggal_lahir?>" required>
+                            </div>
+                          </div> -->
+                        </div>
+                        
+                      </div>
+                      <!-- /.box-body -->
+
+                      <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form>
                   </div>
                   <!-- /.tab-pane -->
                 </div>

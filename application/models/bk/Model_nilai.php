@@ -6,17 +6,17 @@ class Model_nilai extends CI_Model
 
     public $id_nilai;
     public $id_siswa;
-    public $ipa;
     public $mtk;
+    public $ipa;
 
     public function rules()
     {
         return [
             
-            ['field' => 'ipa',
+            ['field' => 'mtk',
             'rules' => 'required'],
 
-            ['field' => 'mtk',
+            ['field' => 'ipa',
             'rules' => 'required']
 
         ];
@@ -24,7 +24,7 @@ class Model_nilai extends CI_Model
 
     // public function getFull()
     // {
-    //     $this->db->order_by('ipa', 'ASC');
+    //     $this->db->order_by('mtk', 'ASC');
     //     return $this->db->get($this->_table)->result();
     // }
     
@@ -66,8 +66,8 @@ class Model_nilai extends CI_Model
         $post = $this->input->post();
         $this->id_nilai = NULL;//uniqid();
         $this->id_siswa = $post["id_siswa"];
-        $this->ipa = $post["ipa"];
         $this->mtk = $post["mtk"];
+        $this->ipa = $post["ipa"];
         $this->psikotes = $post["psikotes"];
         return $this->db->insert($this->_table, $this);
     }
@@ -77,8 +77,8 @@ class Model_nilai extends CI_Model
         $post = $this->input->post();
         $this->id_nilai = $post["id_nilai"];
         $this->id_siswa = $post["id_siswa"];
-        $this->ipa = $post["ipa"];
         $this->mtk = $post["mtk"];
+        $this->ipa = $post["ipa"];
         $this->psikotes = $post["psikotes"];
         return $this->db->update($this->_table, $this, array('id_siswa' => $post['id_siswa']));
     }

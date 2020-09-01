@@ -11,6 +11,7 @@ class Angket extends CI_Controller {
         $this->load->model('siswa/model_minat_mapel');
         $this->load->model('siswa/model_minat_kerja');
         $this->load->model('siswa/model_minat_pt');
+        $this->load->model('bk/model_nilai');
         if($this->model_login->isNotLogin()) redirect(site_url('login'));
     }
 
@@ -23,6 +24,7 @@ class Angket extends CI_Controller {
         $data["minat_mapel"] = $this->model_minat_mapel->getAll($id);
         $data["minat_kerja"] = $this->model_minat_kerja->getAll($id);
         $data["minat_pt"] = $this->model_minat_pt->getAll($id);
+        $data["nilais"] = $this->model_nilai->getSiswa($id);
         $this->template->load('siswa/base', 'siswa/angket/data', $data);
     }
     
@@ -157,6 +159,25 @@ class Angket extends CI_Controller {
         else{
             $this->session->set_flashdata('failed', 'Gagal dihapus');
         }
+        redirect(site_url('siswa/angket'));
+    }
+
+    public function updatenilai($id = null)
+    {
+        if (!isset($id)) redirect('siswa/angket');
+       
+        $nilai = $this->model_nilai;
+        $validation = $this->form_validation;
+        $validation->set_rules($nilai->rules());
+
+        if ($validation->run()) {
+            $nilai->update();
+            $this->session->set_flashdata('success', 'Data Berhasil Disimpan');
+        }
+        else {
+            $this->session->set_flashdata('failed', 'Data Gagal Disimpan');
+        }
+        
         redirect(site_url('siswa/angket'));
     }
 }
