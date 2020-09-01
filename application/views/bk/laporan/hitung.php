@@ -470,4 +470,6 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
+
+      <!-- disini nanti bisa diisi grafik jika memungkinkan -->
     </section>
