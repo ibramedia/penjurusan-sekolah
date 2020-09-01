@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2020 at 05:21 PM
--- Server version: 8.0.13
--- PHP Version: 7.3.11
+-- Generation Time: Sep 01, 2020 at 11:57 AM
+-- Server version: 8.0.18
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -117,8 +116,8 @@ INSERT INTO `minat_pt` (`id_minat_pt`, `id_siswa`, `pt`, `alasan`) VALUES
 CREATE TABLE `nilai` (
   `id_nilai` int(11) NOT NULL,
   `id_siswa` int(11) NOT NULL,
-  `ipa` float NOT NULL,
   `mtk` float NOT NULL,
+  `ipa` float NOT NULL,
   `psikotes` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -126,7 +125,7 @@ CREATE TABLE `nilai` (
 -- Dumping data for table `nilai`
 --
 
-INSERT INTO `nilai` (`id_nilai`, `id_siswa`, `ipa`, `mtk`, `psikotes`) VALUES
+INSERT INTO `nilai` (`id_nilai`, `id_siswa`, `mtk`, `ipa`, `psikotes`) VALUES
 (1, 1, 68, 73, 86),
 (2, 2, 74, 71, 104),
 (3, 3, 77, 80, 91),
@@ -278,7 +277,7 @@ INSERT INTO `nilai` (`id_nilai`, `id_siswa`, `ipa`, `mtk`, `psikotes`) VALUES
 (149, 149, 86, 84, 90),
 (150, 150, 81, 84, 98),
 (151, 151, 82, 83, 89),
-(152, 152, 0, 0, 89),
+(152, 152, 70, 86, 89),
 (153, 153, 85, 87, 81),
 (154, 154, 79, 71, 92),
 (155, 155, 82, 80, 93),
@@ -301,7 +300,7 @@ INSERT INTO `nilai` (`id_nilai`, `id_siswa`, `ipa`, `mtk`, `psikotes`) VALUES
 (172, 172, 80, 80, 90),
 (173, 173, 74, 74, 90),
 (174, 174, 95, 92, 89),
-(175, 175, 0, 0, 0),
+(175, 175, 80, 79, 110),
 (176, 176, 80.84, 80.85, 90),
 (177, 177, 82, 79, 86),
 (178, 178, 83, 79, 84),
@@ -323,14 +322,14 @@ INSERT INTO `nilai` (`id_nilai`, `id_siswa`, `ipa`, `mtk`, `psikotes`) VALUES
 (194, 194, 82, 84, 89),
 (195, 195, 79, 78, 110),
 (196, 196, 90, 92, 99),
-(197, 197, 0, 0, 0),
+(197, 197, 77, 88, 98),
 (198, 198, 76, 82, 87),
 (199, 199, 76, 82, 96),
 (200, 200, 77, 80, 97),
 (201, 201, 80, 81, 95),
 (202, 202, 90, 92, 91),
 (203, 203, 78, 84, 99),
-(204, 204, 0, 0, 90),
+(204, 204, 70, 81, 90),
 (205, 205, 77, 77, 84),
 (206, 206, 84, 81, 92),
 (207, 207, 86, 92, 110),
