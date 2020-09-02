@@ -448,7 +448,7 @@
                 $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
 
 
-                $conn = mysqli_connect("127.0.0.1", "root", "rootdatabase", "penjurusan-sekolah");
+                $conn = mysqli_connect("localhost", "root", "Dum412019", "penjurusan-sekolah");
                 $sql = "UPDATE siswa SET µi1p1='$µi1', µi2p1='$µi2' WHERE id_siswa='$siswa->id_siswa'";
                 $query = mysqli_query($conn, $sql);
                 ?>
