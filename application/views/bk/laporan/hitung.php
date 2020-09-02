@@ -386,6 +386,7 @@
                 </thead>
                 <tbody>
                 <?php
+		$p1 = 0;
                 $no = 1; foreach ($siswas as $siswa):
                 // mencari nilai random / partisi yang di sum = 1
                 // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
