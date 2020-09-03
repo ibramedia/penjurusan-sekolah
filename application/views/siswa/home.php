@@ -100,15 +100,20 @@
                   <?php
                 }
                 else{
-                  $x =  $this->common->getSiswaData()->c_value;
-                  if ($x==0 || $x===0.0){
+                  $µi1 =  $this->common->getSiswaData()->µi1p11;
+                  $µi2 =  $this->common->getSiswaData()->µi2p11;
+
+                  // logic putusan:
+                  // - antara µi1 & µi2, jika salah satu lebih besar, maka masuk ke kelas tsb
+
+                  if ($µi1==0 && $µi2===0){
                     echo "<i>Belum ada putusan</i>";
                   }
-                  elseif($x <= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
-                    echo "<b>IPS</b>";
-                  }
-                  elseif ($x >= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                  elseif($µi1 > $µi2) {
                     echo "<b>IPA</b>";
+                  }
+                  elseif($µi1 < $µi2) {
+                    echo "<b>IPS</b>";
                   }
                 }
                 ?>

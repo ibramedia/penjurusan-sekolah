@@ -171,13 +171,26 @@ class Angket extends CI_Controller {
         $validation->set_rules($nilai->rules());
 
         if ($validation->run()) {
-            $nilai->update();
+            $nilai->proses();
             $this->session->set_flashdata('success', 'Data Berhasil Disimpan');
         }
         else {
             $this->session->set_flashdata('failed', 'Data Gagal Disimpan');
         }
         
+        redirect(site_url('siswa/angket'));
+    }
+
+    public function hapusnilai($id=null)
+    {
+        if (!isset($id)) show_404();
+        
+        if ($this->model_nilai->delete($id)) {
+            $this->session->set_flashdata('success', 'Berhasil dihapus');
+        }
+        else{
+            $this->session->set_flashdata('failed', 'Gagal dihapus');
+        }
         redirect(site_url('siswa/angket'));
     }
 }

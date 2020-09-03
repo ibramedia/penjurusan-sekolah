@@ -27,7 +27,7 @@
     				<?php endif; ?>
             <div class="box-header">
               <a href="<?php echo site_url('bk/laporan/hitung') ?>" class="btn btn-primary btn-xs"><i class="fa fa-cog"></i> Proses Perhitungan</a>
-              <!-- <a href="#" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print"></i> Cetak</a> -->
+              <a href="<?php echo site_url('pdf.php')?>" target="_blank" class="btn btn-primary btn-xs pull-right"><i class="fa fa-print"></i> Cetak</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body" style="overflow:auto;">
@@ -83,16 +83,21 @@
                     echo "Belum diinput";?></td>
                   <td>
                   <?php
-                  $x =  $siswa->c_value;
-                  if ($x==0 || $x===0.0){
-                    echo "<i>Belum ada putusan</i>";
-                  }
-                  elseif($x <= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
-                    echo "<b>IPS</b>";
-                  }
-                  elseif ($x >= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
-                    echo "<b>IPA</b>";
-                  }
+                    $µi1 =  $siswa->µi1p11;
+                    $µi2 =  $siswa->µi2p11;
+
+                    // logic putusan:
+                    // - antara µi1 & µi2, jika salah satu lebih besar, maka masuk ke kelas tsb
+
+                    if ($µi1==0 && $µi2===0){
+                      echo "<i>Belum ada putusan</i>";
+                    }
+                    elseif($µi1 > $µi2) {
+                      echo "<b>IPA</b>";
+                    }
+                    elseif($µi1 < $µi2) {
+                      echo "<b>IPS</b>";
+                    }
                   ?></td>
                   <td>
                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lihat-data<?php echo $siswa->id_siswa ?>"><i class="fa fa fa-folder-open"></i>&nbsp;Rincian</a>
@@ -162,17 +167,22 @@
                               <label>Klaster</label>
                               <h4 class="text-center">
                               <?php
-                                $x =  $siswa->c_value;
-                                if ($x==0 || $x===0.0){
+                                $µi1 =  $siswa->µi1p11;
+                                $µi2 =  $siswa->µi2p11;
+
+                                // logic putusan:
+                                // - antara µi1 & µi2, jika salah satu lebih besar, maka masuk ke kelas tsb
+
+                                if ($µi1==0 && $µi2===0){
                                   echo "<i>Belum ada putusan</i>";
                                 }
-                                elseif($x <= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
-                                  echo "<b>IPS</b>";
-                                }
-                                elseif ($x >= number_format(0.5, 1)) { //pembagian 2 cluster berdasarkan 0,5
+                                elseif($µi1 > $µi2) {
                                   echo "<b>IPA</b>";
                                 }
-                                ?>
+                                elseif($µi1 < $µi2) {
+                                  echo "<b>IPS</b>";
+                                }
+                              ?>
                               </h4>
                             </div>
                           </div>

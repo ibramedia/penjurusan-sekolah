@@ -1,4 +1,6 @@
-
+<?php
+$conn = mysqli_connect("127.0.0.1", "root", "rootdatabase", "penjurusan-sekolah");
+?>
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -201,6 +203,7 @@
       </div>
       <!-- /.row -->
 
+      <!-- perhitungan utk iterasi 1 -->
       <div class="row">
         <div class="col-xs-12">
           
@@ -323,6 +326,7 @@
                 $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
                 $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
 
+                // variabel untuk perhitungan L2
                 $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
                 $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
                 $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
@@ -446,9 +450,7 @@
 
                 // L2/LT
                 $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
-
-
-                $conn = mysqli_connect("localhost", "root", "Dum412019", "penjurusan-sekolah");
+                
                 $sql = "UPDATE siswa SET µi1p1='$µi1', µi2p1='$µi2' WHERE id_siswa='$siswa->id_siswa'";
                 $query = mysqli_query($conn, $sql);
                 ?>
@@ -468,7 +470,8 @@
                   <td><?php echo $µi2; ?></td>
                 </tr>
                 <?php endforeach;
-                
+                $sql = "UPDATE fcm SET p1='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
                 ?>
                 <tr>
                   <td colspan="9">&nbsp;</td>
@@ -488,6 +491,7 @@
       </div>
       <!-- /.row -->
 
+      <!-- perhitungan utk iterasi 2 -->
       <div class="row">
         <div class="col-xs-12">
           
@@ -610,6 +614,7 @@
                 $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
                 $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
 
+                // variabel untuk perhitungan L2
                 $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
                 $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
                 $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
@@ -733,6 +738,9 @@
 
                 // L2/LT
                 $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p2='$µi1', µi2p2='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
                 ?>
                 <tr>
                   <td><?php echo $no++ ?></td>
@@ -751,10 +759,2605 @@
                 </tr>
                 <?php endforeach;
                 
+                $sql = "UPDATE fcm SET p2='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
                 ?>
                 <tr>
                   <td colspan="9">&nbsp;</td>
                   <td align="right"><b>Σ (p2)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- perhitungan utk iterasi 3 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 3</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p2;
+                $µi2 = $siswa->µi2p2;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 3</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p2;
+                $µi2 = $siswa->µi2p2;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p3='$µi1', µi2p3='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p3='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p3)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- perhitungan utk iterasi 4 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 4</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p3;
+                $µi2 = $siswa->µi2p3;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 4</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p3;
+                $µi2 = $siswa->µi2p3;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p4='$µi1', µi2p4='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p4='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p4)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+
+      <!-- perhitungan utk iterasi 5 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 5</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p4;
+                $µi2 = $siswa->µi2p4;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 5</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p4;
+                $µi2 = $siswa->µi2p4;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p5='$µi1', µi2p5='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p5='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p5)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- perhitungan utk iterasi 6 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 6</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p5;
+                $µi2 = $siswa->µi2p5;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 6</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p5;
+                $µi2 = $siswa->µi2p5;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p6='$µi1', µi2p6='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p6='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p6)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- perhitungan utk iterasi 7 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 7</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p6;
+                $µi2 = $siswa->µi2p6;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 7</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p6;
+                $µi2 = $siswa->µi2p6;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p7='$µi1', µi2p7='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p7='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p7)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- perhitungan utk iterasi 8 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 8</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p7;
+                $µi2 = $siswa->µi2p7;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 8</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p7;
+                $µi2 = $siswa->µi2p7;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p8='$µi1', µi2p8='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p8='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p8)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- perhitungan utk iterasi 9 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 9</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p8;
+                $µi2 = $siswa->µi2p8;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 9</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p8;
+                $µi2 = $siswa->µi2p8;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p9='$µi1', µi2p9='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p9='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p9)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- perhitungan utk iterasi 10 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 10</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p9;
+                $µi2 = $siswa->µi2p9;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 10</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p9;
+                $µi2 = $siswa->µi2p9;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p10='$µi1', µi2p10='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p10='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p10)</b></td>
+                  <td class="bg-gray disabled"><?php echo $p;?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- perhitungan utk iterasi 11 -->
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Hasil Perhitungan 11</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="4">Partisi Awal</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 1</th>
+                  <th class="text-center" colspan="4">Derajat Keanggotaan Klaster 2</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">µi1</th>
+                  <th class="text-center">µi2</th>
+                  <th class="text-center">Jumlah</th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi1)<sup>2</sup> * X3</th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X1</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X2</th>
+                  <th class="text-center">(µi2)<sup>2</sup> * X3</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $dkµi1_sum = 0;
+                $dkµi1x1_sum = 0;
+                $dkµi1x2_sum = 0;
+                $dkµi1x3_sum = 0;
+                $dkµi2_sum = 0;
+                $dkµi2x1_sum = 0;
+                $dkµi2x2_sum = 0;
+                $dkµi2x3_sum = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+
+                $µi1 = $siswa->µi1p10;
+                $µi2 = $siswa->µi2p10;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // derajat ke anggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+                $dkµi1x1 = $dkµi1 * $x1;
+                $dkµi1x2 = $dkµi1 * $x2;
+                $dkµi1x3 = $dkµi1 * $x3;
+                $dkµi1_sum += $dkµi1;
+                $dkµi1x1_sum += $dkµi1x1;
+                $dkµi1x2_sum += $dkµi1x2;
+                $dkµi1x3_sum += $dkµi1x3;
+
+                // derajat ke anggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                $dkµi2x1 = $dkµi2 * $x1;
+                $dkµi2x2 = $dkµi2 * $x2;
+                $dkµi2x3 = $dkµi2 * $x3;
+                $dkµi2_sum += $dkµi2;
+                $dkµi2x1_sum += $dkµi2x1;
+                $dkµi2x2_sum += $dkµi2x2;
+                $dkµi2x3_sum += $dkµi2x3;
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                  <td><?php echo $sum; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi1x1; ?></td>
+                  <td><?php echo $dkµi1x2; ?></td>
+                  <td><?php echo $dkµi1x3; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td><?php echo $dkµi2x1; ?></td>
+                  <td><?php echo $dkµi2x2; ?></td>
+                  <td><?php echo $dkµi2x3; ?></td>
+                </tr>
+                <?php endforeach;
+
+                // variabel untuk perhitungan L1
+                $v1x1 = $dkµi1x1_sum / $dkµi1_sum;
+                $v1x2 = $dkµi1x2_sum / $dkµi1_sum;
+                $v1x3 = $dkµi1x3_sum / $dkµi1_sum;
+
+                // variabel untuk perhitungan L2
+                $v2x1 = $dkµi2x1_sum / $dkµi2_sum;
+                $v2x2 = $dkµi2x2_sum / $dkµi2_sum;
+                $v2x3 = $dkµi2x3_sum / $dkµi2_sum;
+                ?>
+                <tr>
+                  <td colspan="7">&nbsp;</td>
+                  <td><?php echo $dkµi1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi1x3_sum?></td>
+                  <td><?php echo $dkµi2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x1_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x2_sum?></td>
+                  <td class="bg-gray disabled"><?php echo $dkµi2x3_sum?></td>
+                  
+                </tr>
+                
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          
+          <div class="box box-default">
+            <div class="box-header">
+              <h3 class="box-title">Iterasi 11</h3>
+            </div>
+            
+            <!-- /.box-header -->
+            <div class="box-body" style="overflow:auto;">
+              <table id="example5" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="text-center" colspan="3">Kuadrat Derajat Keanggotaan</th>
+                  <th class="text-center" colspan="3">Data yang diklaster</th>
+                  <th class="text-center" colspan="2">L1</th>
+                  <th class="text-center" colspan="2">L2</th>
+                  <th class="text-center">LT</th>
+                  <th class="text-center">(µi1)</th>
+                  <th class="text-center">(µi2)</th>
+                </tr>
+                <tr>
+                  <th>No.</th>
+                  <th class="text-center">(µi1)<sup>2</sup></th>
+                  <th class="text-center">(µi2)<sup>2</sup></th>
+                  <th class="text-center">X1</th>
+                  <th class="text-center">X2</th>
+                  <th class="text-center">X3</th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi1)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup></th>
+                  <th class="text-center">[(Xij - Vij)<sup>2</sup> * (µi2)<sup>2</sup></th>
+                  <th class="text-center">L1+L2</th>
+                  <th class="text-center">L1/LT</th>
+                  <th class="text-center">L2/LT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $p = 0;
+                $no = 1; foreach ($siswas as $siswa):
+                // mencari nilai random / partisi yang di sum = 1
+                // ref: https://stackoverflow.com/questions/2640053/getting-n-random-numbers-whose-sum-is-m/2640067#2640067
+                // $n1 = (float)rand() / (float)getrandmax();
+                // $n1===0.0 || $n1===0 ? $n1=0.1 : $n1 = $n1; 
+                // $n2 = (float)rand() / (float)getrandmax();
+                // $n2===0.0 || $n2===0 ? $n2=0.1 : $n2 = $n2;
+                // $sum_n1n2 = $n1 + $n2;
+                // $sum_n1n2===0 ? $sum_n1n2=0.1 : $sum_n1n2 = $sum_n1n2;
+                // // $c1 = number_format($n1/$sum_n1n2, 1);
+                // // $c2 = number_format($n2/$sum_n1n2, 1);
+                
+                $µi1 = $siswa->µi1p10;
+                $µi2 = $siswa->µi2p10;
+                $sum = $µi1 + $µi2;
+                
+                // parameter
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x1 = $nilai->mtk;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x2 = $nilai->ipa;
+                  }
+                endforeach;
+                foreach ($nilais as $nilai):
+                  if($siswa->id_siswa==$nilai->id_siswa){
+                    $x3 = $nilai->psikotes;
+                  }
+                endforeach;
+                // kuadrat derajat keanggotaan utk klaster 1
+                $dkµi1 = $µi1 * $µi1;
+
+                // kuadrat derajat keanggotaan utk klaster 2
+                $dkµi2 = $µi2 * $µi2;
+                
+                // proses perhitungan L1
+                $pl1 = pow($x1-$v1x1, 2) + pow($x2-$v1x2, 2) + pow($x3-$v1x3, 2);
+                $l1 = $pl1 * $dkµi1;
+                
+                // proses perhitungan L2
+                $pl2 = pow($x1-$v2x1, 2) + pow($x2-$v2x2, 2) + pow($x3-$v2x3, 2);
+                $l2 = $pl2 * $dkµi2;
+
+                // LT
+                $lt = $l1 + $l2;
+                $p += $lt;
+
+                // L1/LT
+                $µi1 = $l1 / $lt; // jadi µi1 untuk iterasi selanjutnya
+
+                // L2/LT
+                $µi2 = $l2 / $lt; // jadi µi2 untuk iterasi selanjutnya
+
+                $sql = "UPDATE siswa SET µi1p11='$µi1', µi2p11='$µi2' WHERE id_siswa='$siswa->id_siswa'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td><?php echo $no++ ?></td>
+                  <td><?php echo $dkµi1; ?></td>
+                  <td><?php echo $dkµi2; ?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x1;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x2;?></td>
+                  <td class="bg-light-blue disabled"><?php echo $x3;?></td>
+                  <td><?php echo $pl1; ?></td>
+                  <td><?php echo $l1; ?></td>
+                  <td><?php echo $pl2; ?></td>
+                  <td><?php echo $l2; ?></td>
+                  <td><?php echo $lt; ?></td>
+                  <td><?php echo $µi1; ?></td>
+                  <td><?php echo $µi2; ?></td>
+                </tr>
+                <?php endforeach;
+                $sql = "UPDATE fcm SET p11='$p' WHERE id_fcm='1'";
+                $query = mysqli_query($conn, $sql);
+                ?>
+                <tr>
+                  <td colspan="9">&nbsp;</td>
+                  <td align="right"><b>Σ (p11)</b></td>
                   <td class="bg-gray disabled"><?php echo $p;?></td>
                   
                 </tr>

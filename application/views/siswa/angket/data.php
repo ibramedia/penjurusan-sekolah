@@ -341,16 +341,16 @@
                     <p>Mohon lengkapi form berikut</p>
                     <hr>
                     <!-- /.box-header -->
-                    <form action="<?php echo site_url('siswa/angket/updatebiodata/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data" class="form-horizontal">
-                    <input type="hidden" name="id_siswa" value="<?php echo $siswa->id_siswa?>" required>
+                    <form action="<?php echo site_url('siswa/angket/updatenilai/'.($siswa->id_siswa)) ?>" role="form" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                    <input type="hidden" name="id_nilai" value="<?php echo $siswa->id_siswa?>" required> <!-- id_siswa = id_nilai -->
+                    <input type="hidden" name="id_siswa" value="<?php echo $siswa->id_siswa?>" required> <!-- id_siswa = id_nilai -->
                     <input type="hidden" name="no_peserta" value="<?php echo $siswa->no_peserta?>" required>
-                    <input type="hidden" name="password" value="<?php echo $siswa->password?>" required>
                       <div class="box-body">
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
                               <label>Nilai MTK</label>
-                              <input type="text" class="form-control" placeholder="Nilai MTK" name="n_mtk" value="<?php
+                              <input type="text" class="form-control" placeholder="Nilai MTK" name="mtk" value="<?php
                               foreach ($nilais as $nilai):
                                 if($this->session->userdata('id_siswa')==$nilai->id_siswa){
                                   echo $nilai->mtk;
@@ -362,7 +362,7 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label>Nilai IPA</label>
-                              <input type="text" class="form-control" placeholder="Nilai IPA" name="n_ipa" value="<?php
+                              <input type="text" class="form-control" placeholder="Nilai IPA" name="ipa" value="<?php
                               foreach ($nilais as $nilai):
                                 if($this->session->userdata('id_siswa')==$nilai->id_siswa){
                                   echo $nilai->ipa;
@@ -371,12 +371,13 @@
                               ?>" required>
                             </div>
                           </div>
-                          <!-- <div class="col-md-4">
-                            <div class="form-group">
-                              <label>Nilai PSIKOTES</label>
-                              <input type="text" class="form-control" placeholder="Nilai PSIKOTES" name="n_psi" value="<?php echo $siswa->tanggal_lahir?>" required>
-                            </div>
-                          </div> -->
+                          <input type="hidden" class="form-control" placeholder="Nilai PSIKOTES" name="psikotes" value="<?php
+                              foreach ($nilais as $nilai):
+                                if($this->session->userdata('id_siswa')==$nilai->id_siswa){
+                                  echo $nilai->psikotes;
+                                }
+                                endforeach;
+                              ?>">
                         </div>
                         
                       </div>
