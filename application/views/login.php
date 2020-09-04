@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html>
 <?php $this->load->view("_partials/head") ?>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="
+background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('<?php echo site_url('dist/img/bg.jpg') ?>');
+  -webkit-background-size: cover;
+  -moz-background-size:  cover;
+  -o-background-size: cover;
+  background-size: cover;
+">
 <div class="login-box">
   <div class="login-logo">
-    <b><?php echo SITE_NAME ?></b>
+    <b style="color: white"><?php echo SITE_NAME ?></b>
     <br>
-    <small><?php echo ucfirst($this->uri->segment(1)) ?></small>
+    <small style="color: white"><?php echo ucfirst($this->uri->segment(1)) ?></small>
   </div>
   <?php if ($this->session->flashdata('failed')): ?>
     <div class="alert alert-danger alert-dismissible">

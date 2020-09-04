@@ -138,10 +138,10 @@ while($row = mysqli_fetch_array($result)){
         $putusan = "<i>Belum ada putusan</i>";
     }
     elseif($µi1 > $µi2) {
-        $putusan = "<b>IPA</b>";
+        $putusan = "<b>MIPA</b>";
     }
     elseif($µi1 < $µi2) {
-        $putusan = "<b>IPS</b>";
+        $putusan = "<b>SOS</b>";
     }
     $html .= '
         <tr>

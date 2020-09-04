@@ -93,10 +93,10 @@
                       echo "<i>Belum ada putusan</i>";
                     }
                     elseif($µi1 > $µi2) {
-                      echo "<b>IPA</b>";
+                      echo "<b>MIPA</b>";
                     }
                     elseif($µi1 < $µi2) {
-                      echo "<b>IPS</b>";
+                      echo "<b>SOS</b>";
                     }
                   ?></td>
                   <td>
@@ -177,10 +177,10 @@
                                   echo "<i>Belum ada putusan</i>";
                                 }
                                 elseif($µi1 > $µi2) {
-                                  echo "<b>IPA</b>";
+                                  echo "<b>MIPA</b>";
                                 }
                                 elseif($µi1 < $µi2) {
-                                  echo "<b>IPS</b>";
+                                  echo "<b>SOS</b>";
                                 }
                               ?>
                               </h4>
