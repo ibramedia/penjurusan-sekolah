@@ -34,6 +34,11 @@ class Model_nilai extends CI_Model
     //     $this->db->where('kelas', $kelas );
     //     return $this->db->get($this->_table)->result();
     // }
+    public function getPerOffset($offset){
+        $this->db->order_by('nama_siswa', 'ASC');
+        $this->db->join('siswa', 'siswa.id_siswa = nilai.id_siswa');
+        return $this->db->get($this->_table, 1, $offset)->result(); // limit 1 offset x
+    }
 
     public function getSiswa($id_siswa)
     {

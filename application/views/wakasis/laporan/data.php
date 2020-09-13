@@ -39,7 +39,8 @@
                   <th>MTK</th>
                   <th>IPA</th>
                   <th>PSIKOTES</th>
-                  <th>Klaster</th>
+                  <th>Hasil FCM</th>
+                  <th>Hasil Pilihan Siswa</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
@@ -80,25 +81,22 @@
                   endforeach;
                   if($jum_psikotes==0)
                     echo "Belum diinput";?></td>
-                  <td>
-                  <?php
-                  $µi1 =  $siswa->µi1p11;
-                  $µi2 =  $siswa->µi2p11;
-
-                  // logic putusan:
-                  // - antara µi1 & µi2, jika salah satu lebih besar, maka masuk ke kelas tsb
-
-                  if ($µi1==0 && $µi2===0){
-                    echo "<i>Belum ada putusan</i>";
+                  <td class="text-center bg-success"><b><?= empty($siswa->hasil) ? 'Belum ada putusan' : $siswa->hasil; ?></b></td>
+                  <td class="text-center"><b><?php 
+                  $pilihminat=0;
+                  foreach ($peminatans as $peminatan):
+                  if($siswa->id_siswa==$peminatan->id_siswa){
+                    $pilihminat++;
+                    if($peminatan->pilihan==1){
+                      echo "MIPA";
+                    }
+                    else{
+                      echo "SOS";
+                    }
                   }
-                  elseif($µi1 > $µi2) {
-                    echo "<b>MIPA</b>";
-                  }
-                  elseif($µi1 < $µi2) {
-                    echo "<b>SOS</b>";
-                  }
-                  ?>
-                  </td>
+                  endforeach;
+                  if($pilihminat==0)
+                    echo "Belum diinput";?></b></td>
                   <td>
                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lihat-data<?php echo $siswa->id_siswa ?>"><i class="fa fa fa-folder-open"></i>&nbsp;Rincian</a>
                   </td>
@@ -164,26 +162,8 @@
                               </div>
                             </div>
                             <div class="form-group">
-                              <label>Klaster</label>
-                              <h4 class="text-center">
-                              <?php
-                              $µi1 =  $siswa->µi1p11;
-                              $µi2 =  $siswa->µi2p11;
-          
-                              // logic putusan:
-                              // - antara µi1 & µi2, jika salah satu lebih besar, maka masuk ke kelas tsb
-          
-                              if ($µi1==0 && $µi2===0){
-                                echo "<i>Belum ada putusan</i>";
-                              }
-                              elseif($µi1 > $µi2) {
-                                echo "<b>IPA</b>";
-                              }
-                              elseif($µi1 < $µi2) {
-                                echo "<b>IPS</b>";
-                              }
-                              ?>
-                              </h4>
+                              <label>Hasil FCM</label>
+                              <h4 class="text-center"><?= empty($siswa->hasil) ? 'Belum ada putusan' : $siswa->hasil; ?></h4>
                             </div>
                           </div>
                           <div class="modal-footer">

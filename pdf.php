@@ -17,7 +17,7 @@ class MYPDF extends TCPDF {
         $this->Image('dist/img/smantri.png', 179, 6, 18, 22, 'PNG', '', '', true, 150, '', false, false, 0, false, false, false);
 
         // Set font
-        $this->SetFont('times', 'B', 20);
+        $this->SetFont('times', 'B', 19);
         // Title
         // $this->Cell(0, 10, 'PEMERINTAH PROVINSI RIAU\nDINAS PENDIDIKAN', 0, false, 'C', 0, '', 0, false, 'M', 'M');
         $html = '
@@ -27,7 +27,7 @@ class MYPDF extends TCPDF {
         <br>SEKOLAH MENENGAH ATAS (SMA) NEGERI 3 DUMAI
         </small>
         <small style="font-size: 10px">
-        <br><br>Jl. Arif Rahman Hakim Telp/Fax. (0765) 4300024 Email. smantri_dumai@yahoo.co.id, Dumai - 2882
+        <br><br>Jl. Arif Rahman Hakim Telp/Fax. (0765) 4300024 Email. smantri_dumai@yahoo.co.id, Dumai - 2882. NPSN: 10405038
         </small>
         ';
         $this->writeHTML($html, true, false, true, false, 'C');
@@ -38,7 +38,7 @@ class MYPDF extends TCPDF {
     // Page footer
     public function Footer() {
         // Position at 15 mm from bottom
-        $this->SetY(-15);
+        $this->SetY(-10);
         // Set font
         $this->SetFont('times', 'I', 9);
         // Page number
@@ -94,16 +94,6 @@ $pdf->SetFont('times', '', 12);
 // $pdf->AddPage();
 $pdf->AddPage('P');
 
-// $pdf->writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='');
-// $pdf->writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true);
-
-$html = '
-NPSN: 10405038
-<br>
-';
-// output the HTML content
-$pdf->writeHTML($html, true, false, true, false, 'R');
-
 $html = '
 <h2 class="center"><u>LAPORAN KEPUTUSAN PENJURUSAN</u></h2>
 <br>
@@ -112,7 +102,6 @@ $html = '
 $pdf->writeHTML($html, true, false, true, false, 'C');
 
 $html = '
-<br><br>
 <table border="1" style="font-size: 13px">
     <tr>
         <th width="5%">No.</th>
@@ -121,27 +110,19 @@ $html = '
         <th>Nilai MTK</th>
         <th>Nilai IPA</th>
         <th>Nilai PSIKOTES</th>
-        <th>Masuk Klaster</th>
+        <th>Hasil FCM</th>
     </tr>';
     $no = 1;
+    $putusan = '';
 $result = mysqli_query($conn, 'select * from siswa a
 inner join nilai b on a.id_siswa = b.id_siswa
 order by a.nama_siswa asc');
 while($row = mysqli_fetch_array($result)){
-    $µi1 =  $row['µi1p11'];
-    $µi2 =  $row['µi2p11'];
-
-    // logic putusan:
-    // - antara µi1 & µi2, jika salah satu lebih besar, maka masuk ke kelas tsb
-
-    if ($µi1==0 && $µi2===0){
-        $putusan = "<i>Belum ada putusan</i>";
+    if(empty($row['hasil'])){
+        $hasil = 'Belum ada putusan';
     }
-    elseif($µi1 > $µi2) {
-        $putusan = "<b>MIPA</b>";
-    }
-    elseif($µi1 < $µi2) {
-        $putusan = "<b>SOS</b>";
+    else{
+        $hasil = $row['hasil'];
     }
     $html .= '
         <tr>
@@ -151,7 +132,7 @@ while($row = mysqli_fetch_array($result)){
             <td align="center">'.$row['mtk'].'</td>
             <td align="center">'.$row['ipa'].'</td>
             <td align="center">'.$row['psikotes'].'</td>
-            <td align="center">'.$putusan.'</td>
+            <td align="center"><b>'.$hasil.'</b></td>
         </tr>
     ';
 }
@@ -162,21 +143,18 @@ $html .='
 $pdf->writeHTML($html, true, false, true, false, 'L');
 
 $html ='
-<br><br>
 <table>
     <tr>
         <td>
             &nbsp;
         </td>
         <td>
-            <p style="text-align:center">
-            Dumai, '.DateToIndo(date('Y-m-d')).'
-            <br>Kepala Sekolah
-            <br><br><br>
-            <br><b>RONI PASLA, S.Sos., M.Pd.</b>
-            <br>Penata Tk. I/III.d
-            <br>NIP. 197807022006041010
-            </p>
+        Dumai, '.DateToIndo(date('Y-m-d')).'
+        <br>Kepala Sekolah
+        <br><br><br>
+        <br><b>RONI PASLA, S.Sos., M.Pd.</b>
+        <br>Penata Tk. I/III.d
+        <br>NIP. 197807022006041010
         </td>
     </tr>
 </table>
@@ -192,7 +170,6 @@ $pdf->writeHTML($html, true, false, true, false, 'C');
 $pdf->lastPage();
 
 // ---------------------------------------------------------
-$dokumen_id = $id_pindah_masuk;
 //Close and output PDF document
 $pdf->Output(__DIR__ . '/berkas/laporan.pdf', 'I');
 // $pdf->Output(__DIR__ . '/berkas/laporan.pdf', 'FI');

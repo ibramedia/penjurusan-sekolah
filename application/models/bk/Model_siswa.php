@@ -33,6 +33,10 @@ class Model_siswa extends CI_Model
         ];
     }
 
+    public function getPerOffset($offset){
+        return $this->db->get($this->_table, 1, $offset)->result(); // limit 1 offset x
+    }
+
     public function getCount($kelas)
     {
         return $this->db->get($this->_table)->num_rows();

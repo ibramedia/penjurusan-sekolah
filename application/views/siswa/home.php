@@ -100,21 +100,9 @@
                   <?php
                 }
                 else{
-                  $µi1 =  $this->common->getSiswaData()->µi1p11;
-                  $µi2 =  $this->common->getSiswaData()->µi2p11;
-
-                  // logic putusan:
-                  // - antara µi1 & µi2, jika salah satu lebih besar, maka masuk ke kelas tsb
-
-                  if ($µi1==0 && $µi2===0){
-                    echo "<i>Belum ada putusan</i>";
-                  }
-                  elseif($µi1 > $µi2) {
-                    echo "<b>MIPA</b>";
-                  }
-                  elseif($µi1 < $µi2) {
-                    echo "<b>SOS</b>";
-                  }
+                  ?>
+                  <b><?= empty($this->common->getSiswaData()->hasil) ? 'Belum ada putusan' : $this->common->getSiswaData()->hasil; ?></b>
+                  <?php
                 }
                 ?>
                 </h4>
